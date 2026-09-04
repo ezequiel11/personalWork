@@ -1,0 +1,14 @@
+node_modules/
+
+# Salidas generadas por Vite
+**/dist/
+
+# Archivos locales de VS Code y del sistema
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Variables de entorno con secretos
+.env
+.env.*
+!.env.example

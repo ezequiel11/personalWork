@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite apps/elr-dev",
-    "build": "vite build apps/elr-dev",
+    "dev": "vite apps/elr-dev --config vite.config.js",
+    "dev:barber": "vite apps/barber-shop --config vite.config.js",
+    "build": "vite build apps/elr-dev --config vite.config.js",
+    "build:barber": "vite build apps/barber-shop --config vite.config.js",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
