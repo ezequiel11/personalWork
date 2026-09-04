@@ -1,0 +1,8 @@
+{
+    "name": "__SITE_NAME__",
+    "short_name": "__SITE_NAME__",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#fffaf5",
+    "theme_color": "#f3b6c8"
+}

@@ -16,6 +16,24 @@ function copySharedComponents() {
     };
 }
 
+function getAppDirectory() {
+    const appArgument = process.argv.find((argument) => argument.startsWith('apps/'));
+    return appArgument ? path.resolve(__dirname, appArgument) : path.resolve(__dirname, 'apps/elr-dev');
+}
+
+function getHtmlInputs(appDirectory) {
+    return Object.fromEntries(
+        fs.readdirSync(appDirectory)
+            .filter((fileName) => fileName.endsWith('.html'))
+            .map((fileName) => [
+                path.basename(fileName, '.html'),
+                path.join(appDirectory, fileName),
+            ]),
+    );
+}
+
+const appDirectory = getAppDirectory();
+
 module.exports = defineConfig({
     plugins: [copySharedComponents()],
     server: {
@@ -25,19 +43,7 @@ module.exports = defineConfig({
     },
     build: {
         rollupOptions: {
-            input: process.argv.includes('apps/barber-shop')
-                ? {
-                    index: path.resolve(__dirname, 'apps/barber-shop/index.html'),
-                    about: path.resolve(__dirname, 'apps/barber-shop/about.html'),
-                    services: path.resolve(__dirname, 'apps/barber-shop/services.html'),
-                    contact: path.resolve(__dirname, 'apps/barber-shop/contact.html'),
-                }
-                : {
-                    index: path.resolve(__dirname, 'apps/elr-dev/index.html'),
-                    about: path.resolve(__dirname, 'apps/elr-dev/about.html'),
-                    services: path.resolve(__dirname, 'apps/elr-dev/services.html'),
-                    contact: path.resolve(__dirname, 'apps/elr-dev/contact.html'),
-                },
+            input: getHtmlInputs(appDirectory),
         },
     },
 });
